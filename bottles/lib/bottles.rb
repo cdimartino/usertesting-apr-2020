@@ -10,8 +10,12 @@ class Bottles
   def verse(number)
     <<~EOL
     #{how_many(number).capitalize} #{container(number)} of beer on the wall, #{how_many(number)} #{container(number)} of beer.
-    #{action(number)}, #{how_many(number-1)} #{container(number-1)} of beer on the wall.
+    #{action(number)}, #{how_many(successor(number))} #{container(successor(number))} of beer on the wall.
     EOL
+  end
+
+  def successor(number)
+    number == 0 ? 99 : number - 1
   end
 
   def action(number)
@@ -27,10 +31,6 @@ class Bottles
   end
 
   def how_many(number)
-    case number
-    when 0  then "no more"
-    when -1 then 99
-    else         number
-    end.to_s
+    number == 0 ? "no more" : number.to_s
   end
 end
